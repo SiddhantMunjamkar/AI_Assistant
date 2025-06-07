@@ -2,7 +2,11 @@
 
 import { PlaceholdersAndVanishInput } from "./ui/placeholders-and-vanish-input";
 
-export function PlaceholdersAndVanishInputDemo() {
+interface PlaceholdersAndVanishInputDemoProps {
+  onSubmitText?: (text: string) => void;
+}
+
+export function PlaceholdersAndVanishInputDemo({ onSubmitText }: PlaceholdersAndVanishInputDemoProps) {
   const placeholders = [
     "Type what's in your mind. We'll code it for you ✨",
     "Describe it like you're texting a friend – we'll handle the rest 💻",
@@ -14,9 +18,12 @@ export function PlaceholdersAndVanishInputDemo() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log(e.target.value);
   };
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>, inputValue: string) => {
     e.preventDefault();
-    console.log("submitted");
+    console.log("submitted", inputValue);
+    if (onSubmitText && inputValue.trim()) {
+      onSubmitText(inputValue.trim());
+    }
   };
   return (
     <div className="flex flex-col justify-center items-center mb-8 pt-10">
