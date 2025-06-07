@@ -11,7 +11,7 @@ export function PlaceholdersAndVanishInput({
 }: {
   placeholders: string[];
   onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
-  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  onSubmit: (e: React.FormEvent<HTMLFormElement>, value: string) => void;
 }) {
   const [currentPlaceholder, setCurrentPlaceholder] = useState(0);
 
@@ -159,6 +159,10 @@ export function PlaceholdersAndVanishInput({
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === "Enter" && !e.shiftKey && !animating) {
+      e.preventDefault();
+      const currentValue = value;
+      // Call onSubmit first before starting the vanish animation
+      onSubmit && onSubmit(e as any, currentValue);
       vanishAndSubmit();
     }
   };
@@ -179,8 +183,10 @@ export function PlaceholdersAndVanishInput({
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const currentValue = value;
+    // Call onSubmit first before starting the vanish animation
+    onSubmit && onSubmit(e, currentValue);
     vanishAndSubmit();
-    onSubmit && onSubmit(e);
   };
   return (
     <form
