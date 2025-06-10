@@ -1,0 +1,35 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment variables and secrets
+.env
+.env.*
+
+# Virtual environment
+venv/
+.venv/
+
+# VSCode or other IDE settings (optional)
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# LangChain / RAG cache or intermediate files (if any)
+*.db
+*.sqlite
+*.faiss
+*.pkl
+*.log
+
+# Notebook checkpoints (if using Jupyter)
+.ipynb_checkpoints/
+
+# Ignore prompt outputs or generated artifacts (optional)
+output/
+outputs/
+
